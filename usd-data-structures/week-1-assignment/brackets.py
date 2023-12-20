@@ -13,18 +13,10 @@ def find_mismatch(text):
         if next in "([{":
             # add opening bracket to stack
             opening_brackets_stack.append(Bracket(next, i + 1))
-
-        if next in ")]}":
-            # closing bracket with no opening bracket
-            if len(opening_brackets_stack) == 0:
-                return i + 1
-            else:
-                top = opening_brackets_stack[-1]
-                if are_matching(top.char,next):
-                    opening_brackets_stack.pop()
-                else:
-                    return i + 1
-                
+        elif next in ")]}":
+            # closing bracket with no matchin opening bracket
+            if not opening_brackets_stack or not are_matching(opening_brackets_stack.pop().char, next):
+                return i + 1                
     if len(opening_brackets_stack) > 0:
         return opening_brackets_stack[0].position
     return "Success"
