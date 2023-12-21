@@ -24,7 +24,6 @@ def build_heap(data):
     swaps = []
     num_elements = len(data)
     for i in range((num_elements//2) -1 , -1 , -1):
-        print(data)
         sift_down(data, i, swaps, len(data) - 1)
     return swaps
 
@@ -35,7 +34,7 @@ def main():
     assert len(data) == n
 
     swaps = build_heap(data)
-
+    print(len(swaps))
     for i, j in swaps:
         print(i, j)
 
